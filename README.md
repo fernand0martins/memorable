@@ -27,7 +27,6 @@ docker-compose exec php bin/console doctrine:fixtures:load
 
 After those, the api documentation should be available in [https://localhost:8443/](https://localhost:8443/) and the assets can be explored and managed in the admin area [https://localhost:444](https://localhost:444)
 
-
 # Documentation / notes
 - [OpenApi swagger file](swagger_docs.json)
 - [Postman Collection](media-repo.postman_collection.json)
@@ -35,3 +34,9 @@ After those, the api documentation should be available in [https://localhost:844
 - Searching assets can be done using the example in the Postman collection
 - CI integration is done using github actions
 
+## Test suit
+- for static code analysis run `docker-compose exec php php vendor/bin/psalm --show-info=true`, no errors or warnings should be found
+- run acceptance/unit tests with`docker-compose exec php php vendor/bin/phpunit tests`, tests should pass
+
+## todo
+- jwt config
