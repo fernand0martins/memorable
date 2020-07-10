@@ -35,7 +35,6 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < 10; $i++) {
             $asset = new Asset();
             $asset->setName('basic_asset_' . $i);
-            dump($asset);
             $manager->persist($asset);
 
         }
