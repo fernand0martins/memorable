@@ -35,7 +35,7 @@ After those, the api documentation should be available in [https://localhost:844
 - CI integration is done using github actions
 
 ## Test suit
-- for static code analysis run `docker-compose exec php php vendor/bin/psalm --show-info=true`, no errors or warnings should be found
+- for static code analysis run `docker-compose exec php php vendor/bin/psalm`, no errors should be found
 - run acceptance/unit tests with`docker-compose exec php php vendor/bin/phpunit tests`, tests should pass
 
 ## todo

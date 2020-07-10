@@ -65,7 +65,7 @@ class S3Repository
             echo $e->getMessage() . PHP_EOL;
         }
 
-        return $result['ObjectURL'];
+        return $result['ObjectURL'] ?? '';
     }
 
     /**
@@ -102,6 +102,6 @@ class S3Repository
             echo $e->getMessage() . PHP_EOL;
         }
 
-        return $result['ObjectURL'];
+        return $result['ObjectURL'] ?? '';
     }
 }

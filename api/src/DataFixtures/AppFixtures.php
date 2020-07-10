@@ -58,8 +58,7 @@ class AppFixtures extends Fixture
         $fileName ='dog_' . time() . '.jpg';
         $imageFile = $this->s3Repository->uploadS3ImageFile(
             $fileName,
-            '/../../resources/dog.jpg',
-            'dog.jpg'
+            '/../../resources/dog.jpg'
         );
         $imageAsset = new Asset();
         $imageAsset->setName('image_asset');
