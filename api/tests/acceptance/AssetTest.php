@@ -13,7 +13,14 @@ class AssetTest extends ApiTestCase
      */
     public function testGetAssetCollection(): void
     {
-        static::createClient()->request('GET', '/assets');
+        static::createClient()->request('GET', '/assets',
+            [
+                'headers' => [
+                    'Authorization' => $_ENV['JWT_TOKEN']
+                ]
+            ]
+        );
+
         $this->assertResponseIsSuccessful();
         $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
         $this->assertMatchesResourceCollectionJsonSchema(Asset::class);

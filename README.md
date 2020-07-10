@@ -37,7 +37,7 @@ Authentication should be done using the button to authenticate, input ``Bearer T
 
 ## Test suit
 - for static code analysis run `docker-compose exec php php vendor/bin/psalm`, no errors should be found
-- run acceptance/unit tests with`docker-compose exec php php bin/phpunit tests`, tests should pass
+- run acceptance/unit tests with`docker-compose exec php php bin/phpunit tests`, tests should pass, tests require the ``JWT_TOKEN=Bearer YOUR_TOKEN`` to be set in ``.env.test``
 
 # Documentation / notes
 - [OpenApi swagger file](swagger_docs.json)
@@ -45,6 +45,3 @@ Authentication should be done using the button to authenticate, input ``Bearer T
 - Endpoints are cached in production using varnish, [config is here](api/config/packages/prod/api_platform.yaml), request should have a header "Cache-Control" with values set to "max-age=0, public, s-maxage=3600"
 - Searching assets can be done using the example in the Postman collection
 - CI integration is done using github actions
-
-## todo
-- jwt config
