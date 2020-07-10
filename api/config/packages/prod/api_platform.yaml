@@ -1,5 +1,4 @@
 api_platform:
-    # Varnish integration, remove if unwanted
     http_cache:
         invalidation:
             enabled: true

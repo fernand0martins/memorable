@@ -34,7 +34,7 @@ After those, the api documentation should be available in [https://localhost:844
 # Documentation / notes
 - [OpenApi swagger file](swagger_docs.json)
 - [Postman Collection](media-repo.postman_collection.json)
-- Endpoints are cached using varnish, [config is here](api/config/packages/api_platform.yaml), request should have a header "Cache-Control" with values set to "max-age=0, public, s-maxage=3600"
+- Endpoints are cached in production using varnish, [config is here](api/config/packages/prod/api_platform.yaml), request should have a header "Cache-Control" with values set to "max-age=0, public, s-maxage=3600"
 - Searching assets can be done using the example in the Postman collection
 - CI integration is done using github actions
 

@@ -5,6 +5,7 @@ namespace App\Repository;
 
 use Aws\S3\Exception\S3Exception;
 use Aws\S3\S3Client;
+use Psr\Log\LoggerInterface;
 
 class S3Repository
 {
@@ -14,14 +15,19 @@ class S3Repository
     /** @var S3Client */
     private $s3Client;
 
+    /** @var LoggerInterface */
+    private $logger;
+
     /**
-     * AppFixtures constructor.
+     * S3Repository constructor.
+     * @param LoggerInterface $logger
      * @param string $s3Region
      * @param string $s3BucketName
      * @param string $s3Key
      * @param string $s3Secret
      */
     public function __construct(
+        LoggerInterface $logger,
         string $s3Region,
         string $s3BucketName,
         string $s3Key,
@@ -29,6 +35,7 @@ class S3Repository
     )
     {
         $this->s3BucketName = $s3BucketName;
+        $this->logger = $logger;
 
         $this->s3Client = new S3Client([
             'version' => 'latest',
@@ -47,7 +54,7 @@ class S3Repository
      * @param string $permissions
      * @return string
      */
-    PUBLIC function uploadS3TextFile(
+    public function uploadS3TextFile(
         string $fileName,
         string $fileBody,
         string $permissions = 'public-read'
@@ -61,8 +68,7 @@ class S3Repository
                 'ACL' => $permissions
             ]);
         } catch (S3Exception $e) {
-            //todo logger here
-            echo $e->getMessage() . PHP_EOL;
+            $this->logger->critical($e->getMessage());
         }
 
         return $result['ObjectURL'] ?? '';
@@ -98,8 +104,7 @@ class S3Repository
             );
 
         } catch (S3Exception $e) {
-            //todo logger here
-            echo $e->getMessage() . PHP_EOL;
+            $this->logger->critical($e->getMessage());
         }
 
         return $result['ObjectURL'] ?? '';
