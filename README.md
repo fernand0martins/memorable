@@ -25,7 +25,15 @@ Load bulk development data:
 docker-compose exec php bin/console doctrine:fixtures:load
 ```
 
-After those, the api documentation should be available in [https://localhost:8443/](https://localhost:8443/) and the assets can be explored and managed in the admin area [https://localhost:444](https://localhost:444)
+Generating a JWT token:
+```bash
+ docker-compose exec php bin/console lexik:jwt:generate-token test
+```
+All operations existing in the Postman collection will require a JWT token to be passed as a header in the format
+``Authorization: Bearer TOKEN_HERE``
+
+After those, the api documentation should be available in [https://localhost:8443/docs/](https://localhost:8443/docs/) and the assets can be explored and managed in the admin area [https://localhost:444](https://localhost:444).
+Authentication should be done using the button to authenticate, input ``Bearer TOKEN_HERE`` on the field to validate.
 
 ## Test suit
 - for static code analysis run `docker-compose exec php php vendor/bin/psalm`, no errors should be found

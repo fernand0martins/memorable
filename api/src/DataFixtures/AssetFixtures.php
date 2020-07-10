@@ -8,16 +8,16 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
 /**
- * Class AppFixtures
+ * Class AssetFixtures
  * @package App\DataFixtures
  */
-class AppFixtures extends Fixture
+class AssetFixtures extends Fixture
 {
     /** @var S3Repository */
     private $s3Repository;
 
     /**
-     * AppFixtures constructor.
+     * AssetFixtures constructor.
      * @param S3Repository $s3Repository
      */
     public function __construct(S3Repository $s3Repository)

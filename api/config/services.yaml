@@ -32,3 +32,18 @@ services:
             $s3BucketName: '%env(resolve:AWS_BUCKET)%'
             $s3Key: '%env(resolve:AWS_KEY)%'
             $s3Secret: '%env(resolve:AWS_SECRET)%'
+
+    App\Swagger\SwaggerDecorator:
+        decorates: 'api_platform.swagger.normalizer.documentation'
+        arguments: ['@App\Swagger\SwaggerDecorator.inner']
+        autoconfigure: false
+
+    app.user.repository:
+        class: App\Repository\UsersRepository
+        arguments:
+            - Symfony\Bridge\Doctrine\RegistryInterface
+
+    app.auth.controller:
+        class: App\Controller\AuthController
+        arguments:
+            - '@app.user.repository'
