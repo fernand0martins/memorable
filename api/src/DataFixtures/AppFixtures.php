@@ -45,7 +45,7 @@ class AppFixtures extends Fixture
             'time of creation: ' . time()
         );
         $textAsset = new Asset();
-        $textAsset->setName('text_asset_' . $i);
+        $textAsset->setName('text_asset');
         $textAsset->setCollection(
             [
                 'name' => 'dummy text file',
@@ -62,7 +62,7 @@ class AppFixtures extends Fixture
             'dog.jpg'
         );
         $imageAsset = new Asset();
-        $imageAsset->setName('image_asset_' . $i);
+        $imageAsset->setName('image_asset');
         $imageAsset->setCollection(
             [
                 'name' => 'dummy image file',
