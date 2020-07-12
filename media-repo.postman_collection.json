@@ -19,7 +19,7 @@
         "header": [
           {
             "key": "Authorization",
-            "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1OTQ1NjI3MzAsImV4cCI6MTU5NDU2NjMzMCwicm9sZXMiOltdLCJ1c2VybmFtZSI6InRlc3QzIn0.gqwiqyIHW9qHblgjH3ESXuOufW2MRz2m0J8ojZPIsS85_EyxcbrbkM2XSt-IXi10PUnP8r3-CtX0jB0tYASbQOjctYepHQhOnoMuBGP6ka9VmTdxr1IM2PUmRjRjrgUX3KOt-iQbrQSHUH8jxDZ_YZtqhxnJ3rYpMxP0sMaI5Rjyp1rvXPGpOXRKh0lPUHnkqHsbohfgT6wCCjcvYW-eWGhNuJJQp8RgtNhL_9P6yzFWI05pTmaZT71zSLsZbIu9ojVORvKNrnxykkwshjOqUO7sfySRr_k5XtX24NLeZPcgQuYLToleopRb4CpV0KLxNhu3rw4pmi674_FQAuj7WjGAet-WVxNJ1G97pk4kr_q5OjXMJ1C384ykFNWdhoKzxVH64jEq6IGYElb5gb0_UuQooO6Sn14TQLMgE9DargvSa1SzhznuOU5RLbT-ejPAZIKEhoE7M3jt8YNLnuI8yzjarNt1FIKy06DLW7GAYd1sc2IczO0qGkMJc21uKssq07JPnKAPGtphEyYmH0wnLHhTyzd7CfRURdXV9MVv_sjMRwFn-QmUGAiEtzl7jsy50lbySH-ftby3-MMQ53-aD0ZWRZW2vSqn2SrgRbftuaVyoG9Ht4_x4bImDNPcN6FS_v30BgwJuQJQ5khVFiLN4VhQ6m4AJQo_nHt1GRTJacI",
+            "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1OTQ1Njk1MzcsImV4cCI6MTU5NDU3MzEzNywicm9sZXMiOltdLCJ1c2VybmFtZSI6InRlc3QyMiJ9.1TdwcnUiuRXTAIoyuhIJ28UW82bT27bKDuVfsKlQpdRy0x8ITb7awZ3GQx3E2L-Tf4aFNLancCJy_EriXgttn4N1frieYnnCCCC5Q-H5AWOD71elJh2hAwwTjsz--pY4te5G0wwz85LvREhgTrJFmHctj6QL8MH9rNidam0ywpVVS7mmTMi3rRr4qhejxDPuKb4-khuGACMhbCZyPvJDu2L6vJk4KdTItxQ_DM0BDUTxK9plOrMOyztHFmsl1EQkBWD7oD0rd8AH46_vvXPI9pHTKyZWaGw8i67dY3D2Qgu96SXpgpkmL4tlrbW19C8P5KDRDTfxFsTpfYusDmnQKr165hZFoHufgTQ07dsCTL90AbN1PHrITnRqcnzoUOxC101YA0MMEKrvT80LdsadyU3V3cz0cqhzyu3qkS-2-YlXhCdOvNzF-Yqur00b4ICmkAC0nHmuem2F_Q4y-GSJNFWpAhU7PaFxXNzoXUqCWeFmDcMmkWewztUUPRFu7sE-fehuNvziM15Zd5-gLI_LyKhwlVCbQpT0K0bS4SYMwxte7alKXgpKghsppxjMTkJv4hY_41yVFEd7Q2LhklZ8FSxa4ZNv0EY1shUBPB1PGFfRcFKcxIUaSHTth60umLHQqK_mJK1ja_WPkGKtcpxd0M6WWz80rO1Pe4ESVFOaXRI",
             "type": "text"
           }
         ],
@@ -233,14 +233,14 @@
           }
         },
         "url": {
-          "raw": "https://localhost:8443/api/register",
+          "raw": "https://localhost:8443/jwt/register",
           "protocol": "https",
           "host": [
             "localhost"
           ],
           "port": "8443",
           "path": [
-            "api",
+            "jwt",
             "register"
           ]
         }

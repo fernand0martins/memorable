@@ -3,9 +3,9 @@
 #    controller: App\Controller\DefaultController::index
 
 registration:
-    path: /api/register
+    path: /jwt/register
     controller: App\Controller\AuthController::register
 
 login_check:
-    path:     /api/login
+    path:     /jwt/login
     methods:  [POST]

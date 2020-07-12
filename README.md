@@ -20,16 +20,28 @@ AWS_KEY=
 AWS_SECRET=
 ```
 
-Load bulk development data:
+# Documentation
+- [OpenApi swagger file](swagger_docs.json)
+- [Postman Collection](media-repo.postman_collection.json)
+- Endpoints are cached in production using [varnish](api/config/packages/api_platform.yaml), cached requests should have the "Cache-Control" header properly set
+- Searching assets can be done using the examples in the Postman collection
+- CI integration is done using github actions
+
+# Notes
+- Load bulk development data:
 ```bash
 docker-compose exec php bin/console doctrine:fixtures:load
 ```
 
-Generating a JWT token:
+- Generating a JWT token:
 ```bash
  docker-compose exec php bin/console lexik:jwt:generate-token test
 ```
-All operations existing in the Postman collection will require a JWT token to be passed as a header in the format
+or
+
+- Create an account using ``/jwt/register`` and create a bearer token by logging in ``/jwt/login`` 
+
+All operations require a JWT token to be passed as a header in the format
 ``Authorization: Bearer TOKEN_HERE``
 
 After those, the api documentation should be available in [https://localhost:8443/docs/](https://localhost:8443/docs/) and the assets can be explored and managed in the admin area [https://localhost:444](https://localhost:444).
@@ -38,10 +50,3 @@ Authentication should be done using the button to authenticate, input ``Bearer T
 ## Test suit
 - for static code analysis run `docker-compose exec php php vendor/bin/psalm`, no errors should be found
 - run acceptance/unit tests with`docker-compose exec php php bin/phpunit tests`, tests should pass, tests require the ``JWT_TOKEN=Bearer YOUR_TOKEN`` to be set in ``.env.test``
-
-# Documentation / notes
-- [OpenApi swagger file](swagger_docs.json)
-- [Postman Collection](media-repo.postman_collection.json)
-- Endpoints are cached in production using varnish, [config is here](api/config/packages/prod/api_platform.yaml), request should have a header "Cache-Control" with values set to "max-age=0, public, s-maxage=3600"
-- Searching assets can be done using the example in the Postman collection
-- CI integration is done using github actions

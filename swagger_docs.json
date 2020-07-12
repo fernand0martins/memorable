@@ -1,5 +1,6 @@
 {
-  "openapi": "3.0.2",
+  "swagger": "2.0",
+  "basePath": "/",
   "info": {
     "title": "Media Repo",
     "version": "1.0.0"
@@ -11,104 +12,19 @@
           "Asset"
         ],
         "operationId": "getAssetCollection",
+        "produces": [
+          "application/ld+json",
+          "application/json",
+          "text/html"
+        ],
         "summary": "Retrieves the collection of Asset resources.",
         "responses": {
           "200": {
             "description": "Asset collection response",
-            "content": {
-              "application/ld+json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "hydra:member": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/Asset:jsonld"
-                      }
-                    },
-                    "hydra:totalItems": {
-                      "type": "integer",
-                      "minimum": 0
-                    },
-                    "hydra:view": {
-                      "type": "object",
-                      "properties": {
-                        "@id": {
-                          "type": "string",
-                          "format": "iri-reference"
-                        },
-                        "@type": {
-                          "type": "string"
-                        },
-                        "hydra:first": {
-                          "type": "string",
-                          "format": "iri-reference"
-                        },
-                        "hydra:last": {
-                          "type": "string",
-                          "format": "iri-reference"
-                        },
-                        "hydra:next": {
-                          "type": "string",
-                          "format": "iri-reference"
-                        }
-                      }
-                    },
-                    "hydra:search": {
-                      "type": "object",
-                      "properties": {
-                        "@type": {
-                          "type": "string"
-                        },
-                        "hydra:template": {
-                          "type": "string"
-                        },
-                        "hydra:variableRepresentation": {
-                          "type": "string"
-                        },
-                        "hydra:mapping": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "@type": {
-                                "type": "string"
-                              },
-                              "variable": {
-                                "type": "string"
-                              },
-                              "property": {
-                                "type": "string"
-                              },
-                              "required": {
-                                "type": "boolean"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "required": [
-                    "hydra:member"
-                  ]
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Asset"
-                  }
-                }
-              },
-              "text/html": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Asset"
-                  }
-                }
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Asset"
               }
             }
           }
@@ -118,19 +34,14 @@
             "name": "name",
             "in": "query",
             "required": false,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
             "name": "page",
             "in": "query",
             "required": false,
             "description": "The collection page number",
-            "schema": {
-              "type": "integer",
-              "default": 1
-            }
+            "type": "integer"
           }
         ]
       },
@@ -139,35 +50,22 @@
           "Asset"
         ],
         "operationId": "postAssetCollection",
+        "consumes": [
+          "application/ld+json",
+          "application/json",
+          "text/html"
+        ],
+        "produces": [
+          "application/ld+json",
+          "application/json",
+          "text/html"
+        ],
         "summary": "Creates a Asset resource.",
         "responses": {
           "201": {
             "description": "Asset resource created",
-            "content": {
-              "application/ld+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Asset:jsonld"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Asset"
-                }
-              },
-              "text/html": {
-                "schema": {
-                  "$ref": "#/components/schemas/Asset"
-                }
-              }
-            },
-            "links": {
-              "GetAssetItem": {
-                "parameters": {
-                  "id": "$response.body#/id"
-                },
-                "operationId": "getAssetItem",
-                "description": "The `id` value returned in the response can be used as the `id` parameter in `GET /assets/{id}`."
-              }
+            "schema": {
+              "$ref": "#/definitions/Asset"
             }
           },
           "400": {
@@ -177,26 +75,16 @@
             "description": "Resource not found"
           }
         },
-        "requestBody": {
-          "content": {
-            "application/ld+json": {
-              "schema": {
-                "$ref": "#/components/schemas/Asset:jsonld"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Asset"
-              }
-            },
-            "text/html": {
-              "schema": {
-                "$ref": "#/components/schemas/Asset"
-              }
+        "parameters": [
+          {
+            "name": "asset",
+            "in": "body",
+            "description": "The new Asset resource",
+            "schema": {
+              "$ref": "#/definitions/Asset"
             }
-          },
-          "description": "The new Asset resource"
-        }
+          }
+        ]
       }
     },
     "/assets/{id}": {
@@ -205,36 +93,25 @@
           "Asset"
         ],
         "operationId": "getAssetItem",
+        "produces": [
+          "application/ld+json",
+          "application/json",
+          "text/html"
+        ],
         "summary": "Retrieves a Asset resource.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Asset resource response",
-            "content": {
-              "application/ld+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Asset:jsonld"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Asset"
-                }
-              },
-              "text/html": {
-                "schema": {
-                  "$ref": "#/components/schemas/Asset"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/Asset"
             }
           },
           "404": {
@@ -261,9 +138,7 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ]
       },
@@ -272,36 +147,38 @@
           "Asset"
         ],
         "operationId": "putAssetItem",
+        "consumes": [
+          "application/ld+json",
+          "application/json",
+          "text/html"
+        ],
+        "produces": [
+          "application/ld+json",
+          "application/json",
+          "text/html"
+        ],
         "summary": "Replaces the Asset resource.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "asset",
+            "in": "body",
+            "description": "The updated Asset resource",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/Asset"
             }
           }
         ],
         "responses": {
           "200": {
             "description": "Asset resource updated",
-            "content": {
-              "application/ld+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Asset:jsonld"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Asset"
-                }
-              },
-              "text/html": {
-                "schema": {
-                  "$ref": "#/components/schemas/Asset"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/Asset"
             }
           },
           "400": {
@@ -310,26 +187,6 @@
           "404": {
             "description": "Resource not found"
           }
-        },
-        "requestBody": {
-          "content": {
-            "application/ld+json": {
-              "schema": {
-                "$ref": "#/components/schemas/Asset:jsonld"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Asset"
-              }
-            },
-            "text/html": {
-              "schema": {
-                "$ref": "#/components/schemas/Asset"
-              }
-            }
-          },
-          "description": "The updated Asset resource"
         }
       },
       "patch": {
@@ -338,35 +195,35 @@
         ],
         "operationId": "patchAssetItem",
         "summary": "Updates the Asset resource.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "produces": [
+          "application/ld+json",
+          "application/json",
+          "text/html"
+        ],
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "asset",
+            "in": "body",
+            "description": "The updated Asset resource",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/Asset"
             }
           }
         ],
         "responses": {
           "200": {
             "description": "Asset resource updated",
-            "content": {
-              "application/ld+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Asset:jsonld"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Asset"
-                }
-              },
-              "text/html": {
-                "schema": {
-                  "$ref": "#/components/schemas/Asset"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/Asset"
             }
           },
           "400": {
@@ -375,91 +232,127 @@
           "404": {
             "description": "Resource not found"
           }
-        },
-        "requestBody": {
-          "content": {
-            "application/merge-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/Asset"
+        }
+      }
+    },
+    "/jwt/register": {
+      "post": {
+        "tags": [
+          "JWT"
+        ],
+        "operationId": "postCredentialsItem",
+        "summary": "Create account",
+        "parameters": [
+          {
+            "name": "User",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "example": "api"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "api"
+                }
               }
             }
-          },
-          "description": "The updated Asset resource"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create account"
+          }
+        }
+      }
+    },
+    "/jwt/login": {
+      "post": {
+        "tags": [
+          "JWT"
+        ],
+        "operationId": "postCredentialsItem",
+        "summary": "Get JWT token",
+        "parameters": [
+          {
+            "name": "User",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "example": "api"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "api"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get JWT token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "readOnly": true
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
   },
-  "components": {
-    "schemas": {
-      "Asset": {
-        "type": "object",
-        "description": "",
-        "properties": {
-          "id": {
-            "readOnly": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          "name": {
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "in": "header",
+      "description": "Value for the Authorization header",
+      "name": "Authorization"
+    }
+  },
+  "security": [
+    {
+      "apiKey": []
+    }
+  ],
+  "definitions": {
+    "Asset": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "format": "uuid"
+        },
+        "name": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "collection": {
+          "type": "array",
+          "items": {
             "type": "string"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "collection": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true
-          }
-        }
-      },
-      "Asset:jsonld": {
-        "type": "object",
-        "description": "",
-        "properties": {
-          "@context": {
-            "readOnly": true,
-            "type": "string"
-          },
-          "@id": {
-            "readOnly": true,
-            "type": "string"
-          },
-          "@type": {
-            "readOnly": true,
-            "type": "string"
-          },
-          "id": {
-            "readOnly": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          "name": {
-            "type": "string"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "collection": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true
           }
         }
       }

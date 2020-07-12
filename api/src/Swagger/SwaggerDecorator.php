@@ -48,46 +48,62 @@ final class SwaggerDecorator implements NormalizerInterface
     {
         $docs = $this->decorated->normalize($object, $format, $context);
 
-        $docs['components']['schemas']['Token'] = [
-            'type' => 'object',
-            'properties' => [
-                'token' => [
-                    'type' => 'string',
-                    'readOnly' => true,
-                ],
-            ],
-        ];
-
-        $docs['components']['schemas']['Credentials'] = [
-            'type' => 'object',
-            'properties' => [
-                'username' => [
-                    'type' => 'string',
-                    'example' => 'api',
-                ],
-                'password' => [
-                    'type' => 'string',
-                    'example' => 'api',
-                ],
-            ],
-        ];
-
         $tokenDocumentation = [
             'paths' => [
-                '/authentication_token' => [
+                '/jwt/register' => [
                     'post' => [
-                        'tags' => ['Token'],
+                        'tags' => ['JWT'],
                         'operationId' => 'postCredentialsItem',
-                        'summary' => 'Get JWT token to login.',
-                        'requestBody' => [
-                            'description' => 'Create new JWT Token',
-                            'content' => [
-                                'application/json' => [
-                                    'schema' => [
-                                        '$ref' => '#/components/schemas/Credentials',
-                                    ],
-                                ],
+                        'summary' => 'Create account',
+                        'parameters' => [
+                           [
+                               'name' => 'User',
+                               'in' => 'body',
+                               'schema' => [
+                                   'type' => 'object',
+                                   'properties' => [
+                                       'username' => [
+                                           'type' => 'string',
+                                           'example' => 'api',
+                                       ],
+                                       'password' => [
+                                           'type' => 'string',
+                                           'example' => 'api',
+                                       ],
+                                   ],
+                               ]
+                           ]
+                        ],
+                        'responses' => [
+                            Response::HTTP_OK => [
+                                'description' => 'Create account'
                             ],
+                        ],
+                    ],
+                ],
+                '/jwt/login' => [
+                    'post' => [
+                        'tags' => ['JWT'],
+                        'operationId' => 'postCredentialsItem',
+                        'summary' => 'Get JWT token',
+                        'parameters' => [
+                            [
+                                'name' => 'User',
+                                'in' => 'body',
+                                'schema' => [
+                                    'type' => 'object',
+                                    'properties' => [
+                                        'username' => [
+                                            'type' => 'string',
+                                            'example' => 'api',
+                                        ],
+                                        'password' => [
+                                            'type' => 'string',
+                                            'example' => 'api',
+                                        ],
+                                    ],
+                                ]
+                            ]
                         ],
                         'responses' => [
                             Response::HTTP_OK => [
@@ -95,8 +111,14 @@ final class SwaggerDecorator implements NormalizerInterface
                                 'content' => [
                                     'application/json' => [
                                         'schema' => [
-                                            '$ref' => '#/components/schemas/Token',
-                                        ],
+                                            'type' => 'object',
+                                            'properties' => [
+                                                'token' => [
+                                                    'type' => 'string',
+                                                    'readOnly' => true,
+                                                ],
+                                            ],
+                                        ]
                                     ],
                                 ],
                             ],
