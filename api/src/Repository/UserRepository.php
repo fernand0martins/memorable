@@ -7,6 +7,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -19,19 +20,19 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
-    /** EntityManager $manager */
-    private $manager;
+    /** @var UserPasswordEncoderInterface  */
+    private UserPasswordEncoderInterface $encoder;
 
     /**
      * UserRepository constructor.
      * @param ManagerRegistry $registry
-     * @param EntityManagerInterface $entityManager
+     * @param UserPasswordEncoderInterface $encoder
      */
-    public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager)
+    public function __construct(ManagerRegistry $registry, UserPasswordEncoderInterface $encoder)
     {
         parent::__construct($registry, User::class);
 
-        $this->manager = $entityManager;
+        $this->encoder = $encoder;
     }
 
     /**
@@ -54,17 +55,17 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
     /**
      * Create a new user
-     * @param $data
+     * @param string $username
+     * @param string $password
      * @return User
      */
-    public function createNewUser($data): User
+    public function createNewUser(string $username, string $password): User
     {
-        $user = new User();
-        $user->setUsername($data['username'])
-            ->setPassword($data['password']);
+        $user = new User($username);
+        $user->setPassword($this->encoder->encodePassword($user, $password));
 
-        $this->manager->persist($user);
-        $this->manager->flush();
+        $this->_em->persist($user);
+        $this->_em->flush();
 
         return $user;
     }

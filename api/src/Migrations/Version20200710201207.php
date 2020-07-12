@@ -24,7 +24,7 @@ final class Version20200710201207 extends AbstractMigration
 
         $this->addSql('DROP SEQUENCE asset_id_seq CASCADE');
         $this->addSql('CREATE SEQUENCE "user_id_seq" INCREMENT BY 1 MINVALUE 1 START 1');
-        $this->addSql('CREATE TABLE "user" (id INT NOT NULL, username VARCHAR(180) NOT NULL, roles JSON NOT NULL, password VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE "user" (id INT NOT NULL, username VARCHAR(180) NOT NULL, roles JSON NOT NULL, password VARCHAR(255) NOT NULL,is_active boolean, PRIMARY KEY(id))');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_8D93D649F85E0677 ON "user" (username)');
         $this->addSql('ALTER TABLE asset ALTER id TYPE UUID');
         $this->addSql('ALTER TABLE asset ALTER id DROP DEFAULT');
